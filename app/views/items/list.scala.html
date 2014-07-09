@@ -1,0 +1,19 @@
+@(items: List[MenuItem])(implicit flash: Flash, lang: Lang)
+@main(Messages("application.name")){
+	<dl class="menu-items">
+		@for(item <- items){
+		<dt>
+			<a href="@controllers.routes.Menu.show(item.id)">
+				@item.name
+			</a>
+		</dt>
+		<dd>@item.category</dd>
+		}
+	</dl>
+	<p>
+		<a 	href="@controllers.routes.Menu.newItem()" 
+			class="btn">
+			<i class="icon-plus"></i> @Messages("menu.new.command")
+		</a>
+	</p>
+}

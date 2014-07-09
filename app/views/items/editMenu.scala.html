@@ -1,0 +1,21 @@
+@(menuForm: Form[MenuItem])(implicit flash: Flash, lang: Lang)
+@import helper._
+@import helper.twitterBootstrap._
+
+@main(Messages("menu.form")){
+	<h2>@Messages("menu.form")</h2>
+
+	@helper.form(action = routes.Menu.save()){
+		<fieldset>
+			<legend>
+				@Messages("menu.details", Messages("menu.new"))
+			</legend>
+			@helper.inputText(menuForm("id"))
+			@helper.inputText(menuForm("name"))
+			@helper.inputText(menuForm("category"))
+			@helper.inputText(menuForm("price"))
+		</fieldset>
+		<p><input type="submit" class="btn primary"
+			value='@Messages("menu.new.submit")'></p>
+	}
+}
