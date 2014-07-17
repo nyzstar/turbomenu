@@ -6,6 +6,7 @@ import play.api.data.Form
 import play.api.data.Forms.{mapping, longNumber, nonEmptyText, of}
 import play.api.i18n.Messages
 import play.api.data.format.Formats._
+import collection.immutable.List
 
 object Menu extends Controller{
 
@@ -14,8 +15,9 @@ object Menu extends Controller{
 			"id" -> longNumber.verifying(
 				"validation.id.duplicate", MenuItem.findById(_).isEmpty),
 			"name" -> nonEmptyText,
-			"category" -> nonEmptyText,
-			"price" -> of[Float]
+			"category_id" -> of[Long],
+			"price" -> of[Float],
+			"restaurant_id" -> of[Long]
 		)(MenuItem.apply)(MenuItem.unapply)
 	)
 
@@ -51,7 +53,7 @@ object Menu extends Controller{
 			},
 
 			success = { newItem =>
-				MenuItem.add(newItem)
+				MenuItem.insert(newItem)
 				val message = Messages("menu.new.success", newItem.name)
 				Redirect(routes.Menu.show(newItem.id)).flashing("success" -> message)
 			}

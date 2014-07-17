@@ -1,4 +1,4 @@
-@(items: List[MenuItem])(implicit flash: Flash, lang: Lang)
+@(items: Iterable[MenuItem])(implicit flash: Flash, lang: Lang)
 @main(Messages("application.name")){
 	<dl class="menu-items">
 		@for(item <- items){
@@ -7,7 +7,7 @@
 				@item.name
 			</a>
 		</dt>
-		<dd>@item.category</dd>
+		<dd>@item.category_id</dd>
 		}
 	</dl>
 	<p>

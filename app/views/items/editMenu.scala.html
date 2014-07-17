@@ -12,8 +12,9 @@
 			</legend>
 			@helper.inputText(menuForm("id"))
 			@helper.inputText(menuForm("name"))
-			@helper.inputText(menuForm("category"))
+			@helper.inputText(menuForm("category_id"))
 			@helper.inputText(menuForm("price"))
+			@helper.inputText(menuForm("restaurant_id"))
 		</fieldset>
 		<p><input type="submit" class="btn primary"
 			value='@Messages("menu.new.submit")'></p>
