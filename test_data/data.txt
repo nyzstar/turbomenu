@@ -1,5 +1,4 @@
-Evvia Estiatorio	420 Emerson St
-Palo Alto, CA 94301	(650) 326-0983	17:30	22:00
+Evvia Estiatorio	420 Emerson St, Palo Alto, CA 94301	650-326-0983	17:30	22:00
 
 entree
 Psari Psito	26.50
@@ -15,3 +14,33 @@ Avgolemono	9.00
 Dessert
 Yiaourti Sorbet	8.25
 Sokolatina	8.00
+
+LYFE Kitchen	167 Hamilton Ave, Palo Alto, CA 94301	650-325-5933	19:00	21:00
+
+entree
+Art's Unfried Chicken or Gardein Chicken	12.99
+Gardein Sausage and Mozzarella Ravioli	11.99
+Grilled Barramundi	13.99
+
+side
+Baked Sweet Potato Fries	2.99
+Roasted Brussels Sprouts and Butternut Squash	2.99
+Baby Kale Salad	2.99
+
+Dessert
+Chocolate Budino	3.99
+Kale-Banana Smoothie	4.99
+
+Rangoon Ruby 445 Emerson St, Palo Alto, CA 94301	650-323-6543	17:00	22:00
+
+entree
+Kebat	12.99
+Basil Chili Beef	15.99
+Rangoon Chicken Curry	18.99
+
+side
+Northern Fried Tofu	5.99
+Palata	4.99
+
+Dessert
+Strawberry Shortcake	6.75

@@ -9,7 +9,8 @@ case class MenuItem(
 	name: String, 
 	categoryId: Long, 
 	price: Float, 
-	restaurantId: Long) extends KeyedEntity[Long]{
+	restaurantId: Long,
+	imageUrl: String) extends KeyedEntity[Long]{
 	lazy val restaurant: ManyToOne[Restaurant] 
 		= Database.restaurantToMenu.right(this)
 	lazy val category: ManyToOne[Category]
