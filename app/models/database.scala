@@ -5,23 +5,25 @@ import org.squeryl.dsl.{OneToMany, ManyToOne}
 
 object Database extends Schema {
 	val menuTable: Table[MenuItem] = table[MenuItem]("menu")
-	val restaurantsTable: Table[Restaurant] = table[Restaurant]("restaurant")
+	val restaurantTable: Table[Restaurant] = table[Restaurant]("restaurant")
 	val categoryTable: Table[Category] = table[Category]("category")
+	val ratingTable: Table[Rating] = table[Rating]("rating")
+	val userTable: Table[User] = table[User]("user")
 
 	val restaurantToMenu = 
-		oneToManyRelation(restaurantsTable, menuTable).via(
+		oneToManyRelation(restaurantTable, menuTable).via(
 			(r, m) => r.id === m.restaurantId)
 
 	val categoryToMenu =
 		oneToManyRelation(categoryTable, menuTable).via(
-			(c, m) => c.id === m.category_id)
+			(c, m) => c.id === m.categoryId)
 
 /*
 	on(menuTable) { m => declare{
 		m.id is(autoIncremented)
 	}}
 
-	on(restaurantsTable){ r => declare{
+	on(restaurantTable){ r => declare{
 		r.id is(autoIncremented)
 	}}
 

@@ -1,6 +1,8 @@
 package models
-import org.squeryl.KeyedEntity
 import org.squeryl.dsl.OneToMany
+import org.squeryl.{KeyedEntity, Query, Table}
+import org.squeryl.PrimitiveTypeMode._
+import collection.Iterable
 
 case class Category(
 	id: Long, 
@@ -9,6 +11,40 @@ case class Category(
 		Database.categoryToMenu.left(this)
 }
 
+object Category{
+	import Database.{categoryTable}
+
+	def insert(category: Category): Category = {
+		categoryTable.insert(category)
+	}
+
+	def update(category: Category) = {
+		categoryTable.update(category)
+	}
+
+	def delete(category: Category) = {
+		categoryTable.deleteWhere(c => c.id === category.id)
+	}
+
+	def findById(id: Long) = inTransaction {
+		queryById(id).toList.headOption
+	}
+
+	def findAll: Iterable[Category] = inTransaction {
+		allQ.toList
+	}
+
+	/**
+	Helper Function
+	**/
+	def allQ: Query[Category] = from(categoryTable){
+		category => select(category)
+	}
+
+	def queryById(id: Long): Query[Category] = from(categoryTable){
+		category => where(category.id === id) select(category)
+	}
+}
 /*
 object Category{
 	var items = Set(

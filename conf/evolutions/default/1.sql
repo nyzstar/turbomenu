@@ -2,7 +2,7 @@
 CREATE TABLE menu(
 	id 			bigint AUTO_INCREMENT PRIMARY KEY,
 	name 		varchar(100),
-	category_id	long,
+	categoryId	long,
 	price		float,
 	restaurantId	long
 );
@@ -22,9 +22,30 @@ CREATE TABLE category(
 	name 		varchar(100)
 );
 
+
+CREATE TABLE rating(
+	id 				int AUTO_INCREMENT PRIMARY KEY,
+	value			int,
+	timeModifed		long,
+	userId			long,
+	menuItemId		long
+);
+
+CREATE TABLE user(
+	id 				int AUTO_INCREMENT PRIMARY KEY,
+	email			varchar(100),
+	password		varchar(50)
+);
+
+
+
 # --- !Downs
 DROP TABLE IF EXISTS menu;
 
 DROP TABLE IF EXISTS restaurant;
 
 DROP TABLE IF EXISTS category;
+
+DROP TABLE IF EXISTS rating;
+
+DROP TABLE IF EXISTS user;

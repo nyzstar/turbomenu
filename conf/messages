@@ -14,5 +14,8 @@ menu.new.submit = Add
 menu.new.success = Successfully Added Item {0}
 menu.list.navigation = Navigation
 
+
+home.search = Search
+
 validation.errors = Please correct the errors in the form.
 validation.id.duplicate = A product with the same id already exists.

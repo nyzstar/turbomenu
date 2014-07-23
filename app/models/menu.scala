@@ -1,5 +1,4 @@
 package models
-import org.squeryl.KeyedEntity
 import org.squeryl.dsl.ManyToOne
 import org.squeryl.{KeyedEntity, Query, Table}
 import org.squeryl.PrimitiveTypeMode._
@@ -8,7 +7,7 @@ import collection.Iterable
 case class MenuItem(
 	id: Long, 
 	name: String, 
-	category_id: Long, 
+	categoryId: Long, 
 	price: Float, 
 	restaurantId: Long) extends KeyedEntity[Long]{
 	lazy val restaurant: ManyToOne[Restaurant] 
@@ -20,18 +19,6 @@ case class MenuItem(
 object MenuItem {
 	import Database.{menuTable}
 
-	def allQ: Query[MenuItem] = from(menuTable){
-		menuItem => select(menuItem)
-	}
-
-	def queryById(id: Long): Query[MenuItem] = from(menuTable){
-		menuItem => where(menuItem.id === id) select(menuItem)
-	}
-
-	def findAll: Iterable[MenuItem] = inTransaction {
-		allQ.toList
-	}
-
 	def insert(menuItem: MenuItem): MenuItem = inTransaction{
 		//prevent menuItem from changing after insertion.
 		//val defensiveCopy = menuItem copy()
@@ -42,10 +29,28 @@ object MenuItem {
 		menuTable.update(menuItem)
 	}
 
+	def delete(menuItem: MenuItem) = inTransaction {
+		menuTable.deleteWhere(m => m.id === menuItem.id)
+	}
+
 	def findById(id: Long) = inTransaction {
 		queryById(id).toList.headOption
 	}
 
+	def findAll: Iterable[MenuItem] = inTransaction {
+		allQ.toList
+	}
+
+	/**
+	Helper Function
+	**/
+	def allQ: Query[MenuItem] = from(menuTable){
+		menuItem => select(menuItem)
+	}
+
+	def queryById(id: Long): Query[MenuItem] = from(menuTable){
+		menuItem => where(menuItem.id === id) select(menuItem)
+	}
 }
 /*
 object MenuItem {

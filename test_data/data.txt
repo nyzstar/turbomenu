@@ -1,0 +1,17 @@
+Evvia Estiatorio	420 Emerson St
+Palo Alto, CA 94301	(650) 326-0983	17:30	22:00
+
+entree
+Psari Psito	26.50
+Solomos	26.50
+Kokinisto Me Manestra	30.00
+Arnisia Paidakia	38.00
+
+side
+Horiatiki	10.00
+Spanakotiropita	8.75
+Avgolemono	9.00
+
+Dessert
+Yiaourti Sorbet	8.25
+Sokolatina	8.00

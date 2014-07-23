@@ -1,5 +1,17 @@
 @(items: Iterable[MenuItem])(implicit flash: Flash, lang: Lang)
 @main(Messages("application.name")){
+	<div>
+		@helper.form(action = routes.Home.browse(), 'class -> "form-inline"){
+		<div class="form-group">
+				<input type="search" name="searchBy" placeholder="Discover your favorite meal" class="form-control">
+				<button type="submit" class="btn btn-primary"
+					value='@Messages("home.search")'>
+					<span class="glyphicon glyphicon-search"></i>
+				</button>
+		</div>
+		}
+	</div>
+
 	<dl class="menu-items">
 		@for(item <- items){
 		<dt>

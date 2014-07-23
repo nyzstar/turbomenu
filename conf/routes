@@ -8,5 +8,8 @@ GET		/menu/new					controllers.Menu.newItem
 GET     /                           controllers.Application.index
 GET 	/menu 						controllers.Menu.list
 GET		/menu/:id 					controllers.Menu.show(id: Long)
+
+GET		/browse 					controllers.Home.browse(sortBy: String?="timeAdded", sortDirection: String="asc", searchBy: String="")
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
