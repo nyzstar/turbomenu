@@ -17,7 +17,8 @@ object Menu extends Controller{
 			"name" -> nonEmptyText,
 			"category_id" -> of[Long],
 			"price" -> of[Float],
-			"restaurant_id" -> of[Long]
+			"restaurant_id" -> of[Long],
+			"imageUrl" -> nonEmptyText
 		)(MenuItem.apply)(MenuItem.unapply)
 	)
 

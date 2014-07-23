@@ -4,7 +4,8 @@ CREATE TABLE menu(
 	name 		varchar(100),
 	categoryId	long,
 	price		float,
-	restaurantId	long
+	restaurantId	long,
+	imageUrl	varchar(500)
 );
 
 
@@ -26,7 +27,7 @@ CREATE TABLE category(
 CREATE TABLE rating(
 	id 				int AUTO_INCREMENT PRIMARY KEY,
 	value			int,
-	timeModifed		long,
+	timeModified		long,
 	userId			long,
 	menuItemId		long
 );
@@ -36,7 +37,6 @@ CREATE TABLE user(
 	email			varchar(100),
 	password		varchar(50)
 );
-
 
 
 # --- !Downs
