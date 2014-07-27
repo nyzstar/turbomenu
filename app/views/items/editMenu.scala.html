@@ -5,7 +5,7 @@
 @main(Messages("menu.form")){
 	<h2>@Messages("menu.form")</h2>
 
-	@helper.form(action = routes.Menu.save()){
+	@helper.form(action = routes.MenuControl.save()){
 		<fieldset>
 			<legend>
 				@Messages("menu.details", Messages("menu.new"))
@@ -15,6 +15,7 @@
 			@helper.inputText(menuForm("category_id"))
 			@helper.inputText(menuForm("price"))
 			@helper.inputText(menuForm("restaurant_id"))
+			@helper.inputText(menuForm("image_url"))
 		</fieldset>
 		<p><input type="submit" class="btn primary"
 			value='@Messages("menu.new.submit")'></p>

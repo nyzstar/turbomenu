@@ -1,0 +1,23 @@
+@(restaurantForm: Form[Restaurant])(implicit flash: Flash, lang: Lang)
+@import helper._
+@import helper.twitterBootstrap._
+
+@main(Messages("restaurant.form")){
+	<h2>@Messages("restaurant.form")</h2>
+
+	@helper.form(action = routes.RestaurantControl.save()){
+		<fieldset>
+			<legend>
+				@Messages("restaurant.details", Messages("menu.new"))
+			</legend>
+			@helper.inputText(restaurantForm("id"))
+			@helper.inputText(restaurantForm("name"))
+			@helper.inputText(restaurantForm("address"))
+			@helper.inputText(restaurantForm("open"))
+			@helper.inputText(restaurantForm("close"))
+			@helper.inputText(restaurantForm("contact"))
+		</fieldset>
+		<p><input type="submit" class="btn primary"
+			value='@Messages("restaurant.new.submit")'></p>
+	}
+}

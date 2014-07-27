@@ -1,2 +1,30 @@
-body { color:black; }
-body, p, label { font-size:15px; }
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.search-bar{
+	float: left;
+}
+
+.login-form{
+	float: right;
+}
+
+.crop {
+    width: 100%px;
+    height: 250px;
+    overflow: hidden;
+}
+
+.crop img {
+    width: 100%;
+    margin: 0 0 0 0;
+    border: none;
+    padding: 0;
+}
+
+.menu-box {
+	border: 1px solid #FFF;
+	margin-top: 10px;
+}

@@ -3,13 +3,23 @@
 # ~~~~
 
 # Home page
-POST	/menu 						controllers.Menu.save
-GET		/menu/new					controllers.Menu.newItem
-GET     /                           controllers.Application.index
-GET 	/menu 						controllers.Menu.list
-GET		/menu/:id 					controllers.Menu.show(id: Long)
 
-GET		/browse 					controllers.Home.browse(sortBy: String?="timeAdded", sortDirection: String="asc", searchBy: String="")
+GET     /                           controllers.Application.index
+
+# Menu page
+POST	/menu 						controllers.MenuControl.save
+GET		/menu/new					controllers.MenuControl.newItem
+GET 	/menu 						controllers.MenuControl.list
+GET		/menu/:id 					controllers.MenuControl.show(id: Long)
+
+# Restaurant page
+POST	/restaurant 				controllers.RestaurantControl.save
+GET		/restaurant/new				controllers.RestaurantControl.newRestaurant
+GET 	/restaurant 				controllers.RestaurantControl.list
+GET		/restaurant/:id 			controllers.RestaurantControl.show(id: Long)
+
+
+GET		/browse 					controllers.HomeControl.browse(sortBy: String?="timeAdded", sortDirection: String="asc", searchBy: String="")
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

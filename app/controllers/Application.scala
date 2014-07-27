@@ -6,7 +6,7 @@ import play.api.mvc._
 object Application extends Controller {
 
   def index = Action {
-    Redirect(routes.Home.browse())
+    Redirect(routes.HomeControl.browse())
     //Ok(views.html.index("Your new application is ready."))
   }
 

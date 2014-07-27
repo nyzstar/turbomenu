@@ -9,18 +9,10 @@
         <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/bootstrap.css")'>
         <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
         <link rel="shortcut icon" type="image/png" href='@routes.Assets.at("images/favicon.png")'>
-        <script src='@routes.Assets.at("javascripts/bootstrap.min.js")'></script>
     </head>
     <body>
+    	@navibar()
 		<div class="container">
-			<div>
-		        <ul class="nav nav-pills pull-right">
-		          <li class="active"><a href="#">Home</a></li>
-		          <li><a href="#">About</a></li>
-		          <li><a href="#">Contact</a></li>
-		        </ul>
-		        <h3 class="muted">TurboMenu</h3>
-		    </div>
 			@if(flash.get("success").isDefined){
 				<div class="alert alert-success">
 					@flash.get("success")
@@ -33,7 +25,9 @@
 				</div>
 			}
 			@content
-			@debug()
+			@footer()
 		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src='@routes.Assets.at("javascripts/bootstrap.min.js")'></script>
     </body>
 </html>

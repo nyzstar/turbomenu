@@ -3,7 +3,7 @@
 	<dl class="menu-items">
 		@for(item <- items){
 		<dt>
-			<a href="@controllers.routes.Menu.show(item.id)">
+			<a href="@controllers.routes.MenuControl.show(item.id)">
 				@item.name
 			</a>
 		</dt>
@@ -11,7 +11,7 @@
 		}
 	</dl>
 	<p>
-		<a 	href="@controllers.routes.Menu.newItem()" 
+		<a 	href="@controllers.routes.MenuControl.newItem()" 
 			class="btn">
 			<i class="icon-plus"></i> @Messages("menu.new.command")
 		</a>

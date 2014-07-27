@@ -1,31 +1,15 @@
 @(items: Iterable[MenuItem])(implicit flash: Flash, lang: Lang)
 @main(Messages("application.name")){
-	<div>
-		@helper.form(action = routes.Home.browse(), 'class -> "form-inline"){
-		<div class="form-group">
-				<input type="search" name="searchBy" placeholder="Discover your favorite meal" class="form-control">
-				<button type="submit" class="btn btn-primary"
-					value='@Messages("home.search")'>
-					<span class="glyphicon glyphicon-search"></i>
-				</button>
-		</div>
-		}
-	</div>
-
-	<dl class="menu-items">
+	<div class="container">
+		<div class="row">
 		@for(item <- items){
-		<dt>
-			<a href="@controllers.routes.Menu.show(item.id)">
-				@item.name
-			</a>
-		</dt>
-		<dd>@item.categoryId</dd>
-		}
-	</dl>
-	<p>
-		<a 	href="@controllers.routes.Menu.newItem()" 
-			class="btn">
-			<i class="icon-plus"></i> @Messages("menu.new.command")
-		</a>
-	</p>
+            <div class="col-6 col-sm-6 col-lg-4 menu-box">
+              <span><a href="@controllers.routes.MenuControl.show(item.id)">@item.name</a></span>
+              <div class="crop">
+			   <img class="img-thumbnail" src='@routes.Assets.at(item.imageUrl)'/>
+			  </div>
+            </div><!--/span-->
+        }
+		</div>
+	</div>
 }

@@ -1,0 +1,19 @@
+@(resrants: Iterable[Restaurant])(implicit flash: Flash, lang: Lang)
+@main(Messages("application.name")){
+	<dl>
+		@for(resrant <- resrants){
+		<dt>
+			<a href="@controllers.routes.RestaurantControl.show(resrant.id)">
+				@resrant.name
+			</a>
+		</dt>
+		<dd>@resrant.address</dd>
+		}
+	</dl>
+	<p>
+		<a 	href="@controllers.routes.RestaurantControl.newRestaurant()" 
+			class="btn">
+			<i class="icon-plus"></i> @Messages("restaurant.new.command")
+		</a>
+	</p>
+}

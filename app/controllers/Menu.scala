@@ -8,7 +8,7 @@ import play.api.i18n.Messages
 import play.api.data.format.Formats._
 import collection.immutable.List
 
-object Menu extends Controller{
+object MenuControl extends Controller{
 
 	private val itemForm: Form[MenuItem] = Form(
 		mapping(
@@ -48,7 +48,7 @@ object Menu extends Controller{
 		newMenu.fold(
 			
 			hasErrors = { form =>
-				Redirect(routes.Menu.newItem()).
+				Redirect(routes.MenuControl.newItem()).
 					flashing(Flash(form.data) + 
 						("error" -> Messages("validation.errors")))
 			},
@@ -56,7 +56,7 @@ object Menu extends Controller{
 			success = { newItem =>
 				MenuItem.insert(newItem)
 				val message = Messages("menu.new.success", newItem.name)
-				Redirect(routes.Menu.show(newItem.id)).flashing("success" -> message)
+				Redirect(routes.MenuControl.show(newItem.id)).flashing("success" -> message)
 			}
 
 		)
