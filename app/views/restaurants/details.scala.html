@@ -1,0 +1,27 @@
+@(restaurant: Restaurant)(implicit flash:Flash, lang: Lang)
+
+@main(Messages("restaurant.details", restaurant.name)){
+	<h2>
+		@Messages("restaurant.details", restaurant.name)
+	</h2>
+
+	<dl class="dl-horizontal">
+		<dt>@Messages("id"):</dt>
+		<dd>@restaurant.id</dd>
+
+		<dt>@Messages("name"):</dt>
+		<dd>@restaurant.name</dd>
+
+		<dt>@Messages("address"):</dt>
+		<dd>@restaurant.address</dd>
+
+		<dt>@Messages("open"):</dt>
+		<dd>@restaurant.open</dd>
+
+		<dt>@Messages("close"):</dt>
+		<dd>@restaurant.close</dd>
+
+		<dt>@Messages("contact"):</dt>
+		<dd>@restaurant.contact</dd>
+	</dl>
+}

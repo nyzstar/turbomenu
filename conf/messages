@@ -4,6 +4,10 @@ id = ID
 name = Name
 category = Category
 price = Price
+address = Address
+open = Open Hour
+close = Close Hour
+contact = Contact
 
 menu.details = Item: {0}
 
@@ -14,6 +18,12 @@ menu.new.submit = Add
 menu.new.success = Successfully Added Item {0}
 menu.list.navigation = Navigation
 
+restaurant.form = Restaurant Details
+restaurant.new = (new)
+restaurant.new.command = New
+restaurant.new.submit = Add
+restaurant.new.success = Successfully Added Restaurant {0}
+restaurant.list.navigation = Navigation
 
 home.search = Search
 
