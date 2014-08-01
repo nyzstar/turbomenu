@@ -3,6 +3,7 @@ package controllers
 import play.api.mvc.{Action, Controller, Flash}
 import models.MenuItem
 import models.Restaurant
+import models.Rating
 import play.api.data.Form
 import play.api.data.Forms.{mapping, longNumber, nonEmptyText, of}
 import play.api.i18n.Messages
@@ -30,10 +31,10 @@ object MenuControl extends Controller{
 
 	def show(id: Long) = Action { implicit request =>
 		val item = MenuItem.findById(id).get
-
 		val restaurant = Restaurant.findById(item.restaurantId).get
+		val rating = Rating.averageRatingPerItem(item.id)
 
-		Ok(views.html.items.details(item, restaurant))
+		Ok(views.html.items.details(item, restaurant, rating))
 		
 	}
 

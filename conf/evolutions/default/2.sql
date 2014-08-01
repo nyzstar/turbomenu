@@ -44,6 +44,8 @@ insert into menu (name, categoryId, price, restaurantId, imageUrl) values ("Stra
 
 insert into user(email, password) values ('allen', 'allen');
 insert into user(email, password) values ('chen', 'chen');
+insert into user(email, password) values ('peter', 'peter');
+insert into user(email, password) values ('joe', 'joe');
 
 insert into rating(value, timeModified, userId, menuItemId) values (5, 1396482600, 1, 1);
 insert into rating(value, timeModified, userId, menuItemId) values (4, 1396482600, 1, 2);
@@ -53,9 +55,21 @@ insert into rating(value, timeModified, userId, menuItemId) values (3, 139748260
 insert into rating(value, timeModified, userId, menuItemId) values (2, 1397482600, 2, 2);
 insert into rating(value, timeModified, userId, menuItemId) values (1, 1397482600, 2, 3);
 
+insert into rating(value, timeModified, userId, menuItemId) values (3, 1397482600, 2, 16);
+insert into rating(value, timeModified, userId, menuItemId) values (2, 1397482600, 3, 16);
+insert into rating(value, timeModified, userId, menuItemId) values (1, 1397482600, 4, 16);
+
 # --- !Downs
 delete from restaurant;
+ALTER TABLE restaurant AUTO_INCREMENT = 1;
 delete from category;
+ALTER TABLE category AUTO_INCREMENT = 1;
 delete from menu;
+ALTER TABLE menu AUTO_INCREMENT = 1;
 delete from user;
+ALTER TABLE user AUTO_INCREMENT = 1;
 delete from rating;
+ALTER TABLE rating AUTO_INCREMENT = 1;
+
+
+

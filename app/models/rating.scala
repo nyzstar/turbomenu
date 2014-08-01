@@ -6,7 +6,7 @@ import collection.Iterable
 case class Rating(
 	id:	Long,
 	value:	Int,
-	timeModifed: Long,
+	timeModified: Long,
 	userId: Long,
 	menuItemId: Long
 ) extends KeyedEntity[Long]
@@ -30,6 +30,11 @@ object Rating{
 		queryById(id).toList.headOption
 	}
 
+	def averageRatingPerItem(menuItemId: Long) = inTransaction {
+		val list = queryByMenuItemId(menuItemId).toList
+		list.map(_.value).sum / list.length
+	}
+
 	def findAll: Iterable[Rating] = inTransaction {
 		allQ.toList
 	}
@@ -44,4 +49,9 @@ object Rating{
 	def queryById(id: Long): Query[Rating] = from(ratingTable){
 		rating => where(rating.id === id) select(rating)
 	}
+
+	def queryByMenuItemId(id: Long): Query[Rating] = from(ratingTable){
+		rating=> where(rating.menuItemId === id) select(rating)
+	}
+
 }
