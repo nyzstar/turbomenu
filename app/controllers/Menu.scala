@@ -2,6 +2,7 @@ package controllers
 
 import play.api.mvc.{Action, Controller, Flash}
 import models.MenuItem
+import models.Restaurant
 import play.api.data.Form
 import play.api.data.Forms.{mapping, longNumber, nonEmptyText, of}
 import play.api.i18n.Messages
@@ -28,9 +29,12 @@ object MenuControl extends Controller{
 	}
 
 	def show(id: Long) = Action { implicit request =>
-		MenuItem.findById(id).map{ item => 
-			Ok(views.html.items.details(item))
-		}.getOrElse(NotFound)
+		val item = MenuItem.findById(id).get
+
+		val restaurant = Restaurant.findById(item.restaurantId).get
+
+		Ok(views.html.items.details(item, restaurant))
+		
 	}
 
 	def newItem = Action{ implicit request =>

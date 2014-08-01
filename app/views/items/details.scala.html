@@ -1,4 +1,4 @@
-@(item: MenuItem)(implicit flash:Flash, lang: Lang)
+@(item: MenuItem, restaurant: Restaurant)(implicit flash:Flash, lang: Lang)
 
 @main(Messages("menu.details", item.name)){
 	<h2>
@@ -14,5 +14,8 @@
 
 		<dt>@Messages("price"):</dt>
 		<dd>@item.price</dd>
+
+		<dt>@Messages("name"):</dt>
+		<dd>@restaurant.name</dd>
 	</dl>
 }
