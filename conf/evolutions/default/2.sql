@@ -42,8 +42,8 @@ insert into menu (name, categoryId, price, restaurantId, imageUrl) values ("Pala
 
 insert into menu (name, categoryId, price, restaurantId, imageUrl) values ("Strawberry Shortcake", 3, 6.75, 3, '/test_data/img/Strawbery_Shortcake.jpg');
 
-insert into user(email, password) values ('allen', 'allen');
-insert into user(email, password) values ('chen', 'chen');
+insert into user(email, password) values ('allen@turbomenu.com', 'allen');
+insert into user(email, password) values ('chen@turbomenu.com', 'chen');
 
 insert into rating(value, timeModified, userId, menuItemId) values (5, 1396482600, 1, 1);
 insert into rating(value, timeModified, userId, menuItemId) values (4, 1396482600, 1, 2);

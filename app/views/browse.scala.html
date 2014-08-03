@@ -1,12 +1,13 @@
 @(items: Iterable[MenuItem])(implicit flash: Flash, lang: Lang)
 @main(Messages("application.name")){
+	@navibar()
 	<div class="container">
 		<div class="row">
 		@for(item <- items){
             <div class="col-6 col-sm-6 col-lg-4 menu-box">
               <span><a href="@controllers.routes.MenuControl.show(item.id)">@item.name</a></span>
               <div class="crop">
-			   <img class="img-thumbnail" src='@routes.Assets.at(item.imageUrl)'/>
+			   <img src='@routes.Assets.at(item.imageUrl)'/>
 			  </div>
             </div><!--/span-->
         }

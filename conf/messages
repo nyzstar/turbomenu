@@ -29,3 +29,6 @@ home.search = Search
 
 validation.errors = Please correct the errors in the form.
 validation.id.duplicate = A product with the same id already exists.
+
+login.errors = Invalid email or password
+login.form = Sign In

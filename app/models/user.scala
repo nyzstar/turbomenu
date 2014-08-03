@@ -29,12 +29,26 @@ object User{
 		userTable.deleteWhere(u => u.id === user.id)
 	}
 
+	def findByEmail(email: String):Option[User] = inTransaction{
+		queryByEmail(email).toList.headOption
+	}
+
 	def findById(id: Long) = inTransaction {
 		queryById(id).toList.headOption
 	}
 
-	def findAll: Iterable[User] = inTransaction {
+	def findAll:Iterable[User] = inTransaction {
 		allQ.toList
+	}
+
+	/**
+	* Authenticate a User.
+	*/
+	def authenticate(email: String, password: String): Option[User] = {
+		findByEmail(email) match {
+			case Some(user) if user.checkPassword(password) => Some(user)
+			case None => None
+		}
 	}
 
 	/**
@@ -48,4 +62,8 @@ object User{
 		user => where(user.id === id) select(user)
 	}
 
+	def queryByEmail(email: String): Query[User] = from(userTable){
+		user => where(user.email === email) select(user)
+	}
+	
 }
