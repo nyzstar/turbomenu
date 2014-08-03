@@ -43,7 +43,9 @@ insert into menu (name, categoryId, price, restaurantId, imageUrl) values ("Pala
 insert into menu (name, categoryId, price, restaurantId, imageUrl) values ("Strawberry Shortcake", 3, 6.75, 3, '/test_data/img/Strawbery_Shortcake.jpg');
 
 insert into user(email, password) values ('allen@turbomenu.com', 'allen');
-insert into user(email, password) values ('chen@turbomenu.com', 'chen');
+insert into user(email, password) values ('allen@turbomenu.com', 'chen');
+insert into user(email, password) values ('peter@turbomenu.com', 'peter');
+insert into user(email, password) values ('joe@turbomenu.com', 'joe');
 
 insert into rating(value, timeModified, userId, menuItemId) values (5, 1396482600, 1, 1);
 insert into rating(value, timeModified, userId, menuItemId) values (4, 1396482600, 1, 2);
@@ -53,9 +55,21 @@ insert into rating(value, timeModified, userId, menuItemId) values (3, 139748260
 insert into rating(value, timeModified, userId, menuItemId) values (2, 1397482600, 2, 2);
 insert into rating(value, timeModified, userId, menuItemId) values (1, 1397482600, 2, 3);
 
+insert into rating(value, timeModified, userId, menuItemId) values (3, 1397482600, 2, 16);
+insert into rating(value, timeModified, userId, menuItemId) values (2, 1397482600, 3, 16);
+insert into rating(value, timeModified, userId, menuItemId) values (1, 1397482600, 4, 16);
+
 # --- !Downs
 delete from restaurant;
+ALTER TABLE restaurant AUTO_INCREMENT = 1;
 delete from category;
+ALTER TABLE category AUTO_INCREMENT = 1;
 delete from menu;
+ALTER TABLE menu AUTO_INCREMENT = 1;
 delete from user;
+ALTER TABLE user AUTO_INCREMENT = 1;
 delete from rating;
+ALTER TABLE rating AUTO_INCREMENT = 1;
+
+
+
