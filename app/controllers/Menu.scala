@@ -38,6 +38,12 @@ object MenuControl extends Controller{
 		
 	}
 
+	def newRating(rating: String) = Action { implicit request =>
+		val newRating
+
+	} 
+
+
 	def newItem = Action{ implicit request =>
 		val form = if (request.flash.get("error").isDefined)
 			itemForm.bind(request.flash.data)
