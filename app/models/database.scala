@@ -30,7 +30,6 @@ object Database extends Schema {
 	on(categoryTable){ c => declare{
 		c.id is(autoIncremented)
 	}}
-
 */
 
 }
