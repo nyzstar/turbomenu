@@ -14,7 +14,7 @@ case class Rating(
 object Rating{
 	import Database.{ratingTable}
 
-	def insert(rating: Rating): Rating = {
+	def insert(rating: Rating): Rating = inTransaction{
 		ratingTable.insert(rating)
 	}
 

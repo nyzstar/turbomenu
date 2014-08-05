@@ -5,7 +5,7 @@ import models.MenuItem
 import models.Restaurant
 import models.Rating
 import play.api.data.Form
-import play.api.data.Forms.{mapping, longNumber, nonEmptyText, of}
+import play.api.data.Forms.{mapping, longNumber, nonEmptyText, of, number}
 import play.api.i18n.Messages
 import play.api.data.format.Formats._
 import collection.immutable.List
@@ -24,6 +24,17 @@ object MenuControl extends Controller{
 		)(MenuItem.apply)(MenuItem.unapply)
 	)
 
+	val ratingForm: Form[Rating] = Form( 
+		mapping(
+		"id" ->longNumber.verifying(
+				"validation.id.duplicate", Rating.findById(_).isEmpty),
+		"value" -> of[Int],
+		"timeModified" -> of[Long],
+		"userId" -> of[Long],
+		"menuItemId" -> of[Long]
+		)(Rating.apply)(Rating.unapply)
+	)
+
 	def list = Action { implicit request =>
 		val items = MenuItem.findAll
 		Ok(views.html.items.list(items))
@@ -34,13 +45,26 @@ object MenuControl extends Controller{
 		val restaurant = Restaurant.findById(item.restaurantId).get
 		val rating = Rating.averageRatingPerItem(item.id)
 
-		Ok(views.html.items.details(item, restaurant, rating))
+		Ok(views.html.items.details(item, restaurant, rating, ratingForm))
 		
 	}
 
-	def newRating(rating: String) = Action { implicit request =>
-		val newRating
+	def newRating(id: Long) = Action { implicit request =>
+		val newRate = ratingForm.bindFromRequest()
 
+		newRate.fold(
+			hasErrors = { form =>
+				Redirect(routes.MenuControl.show(id)).
+					flashing(Flash(form.data) + 
+						("error" -> Messages("validation.errors")))
+			},
+
+			success = { newItem =>
+				Rating.insert(newItem)
+				val message = Messages("rating.new.success", newItem.value)
+				Redirect(routes.MenuControl.show(newItem.menuItemId)).flashing("success" -> message)
+			}
+		) 
 	} 
 
 
@@ -69,7 +93,6 @@ object MenuControl extends Controller{
 				val message = Messages("menu.new.success", newItem.name)
 				Redirect(routes.MenuControl.show(newItem.id)).flashing("success" -> message)
 			}
-
 		)
 	}
 }

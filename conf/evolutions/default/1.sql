@@ -27,7 +27,7 @@ CREATE TABLE category(
 CREATE TABLE rating(
 	id 				int AUTO_INCREMENT PRIMARY KEY,
 	value			int,
-	timeModified		long,
+	timeModified	long,
 	userId			long,
 	menuItemId		long
 );

@@ -1,4 +1,5 @@
-@(item: MenuItem, restaurant: Restaurant, rating: Double)(implicit flash:Flash, lang: Lang)
+@(item: MenuItem, restaurant: Restaurant, rating: Double, ratingForm: Form[Rating])(implicit flash:Flash, lang: Lang)
+
 
 @main(Messages("menu.details", item.name)){
 	<h2>
@@ -19,21 +20,23 @@
 		<dt>@Messages("price"):</dt>
 		<dd>@item.price</dd>
 
-		<dt>@Messages("restaurant name"):</dt>
+		<dt>@Messages("restaurant.name"):</dt>
 		<dd>@restaurant.name</dd>
 
-		<dt>@Messages("average rating"):</dt>
+		<dt>@Messages("average.rating"):</dt>
 		<dd>@rating</dd>
 
-        <div class="input-group">
-            <input type="input" name="score" class="form-control">
-            <div class="input-group-btn">
-            <button type="submit" class="btn btn-default"
-              value='@Messages("home.search")'>
-              <i class="glyphicon"></i>
-            </button>
-            </div>
-        </div>
-      		
+	  	@helper.form(action = routes.MenuControl.newRating(item.id)){
+			<fieldset>
+				@helper.inputText(ratingForm("id"))
+				@helper.inputText(ratingForm("value"))
+				@helper.inputText(ratingForm("timeModified"))
+				@helper.inputText(ratingForm("userId"))
+				@helper.inputText(ratingForm("menuItemId"))
+			</fieldset>
+			<p><input type="submit" class="btn primary"
+				value='@Messages("rate")'></p>
+		}
+	      		
 	</dl>
 }

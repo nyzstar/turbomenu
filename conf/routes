@@ -11,6 +11,8 @@ POST	/menu 						controllers.MenuControl.save
 GET		/menu/new					controllers.MenuControl.newItem
 GET 	/menu 						controllers.MenuControl.list
 GET		/menu/:id 					controllers.MenuControl.show(id: Long)
+POST    /menu/:id                   controllers.MenuControl.newRating(id: Long)
+
 
 # Restaurant page
 POST	/restaurant 				controllers.RestaurantControl.save
