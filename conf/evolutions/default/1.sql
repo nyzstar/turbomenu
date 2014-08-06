@@ -1,11 +1,11 @@
 # --- !Ups
 CREATE TABLE menu(
-	id 			bigint AUTO_INCREMENT PRIMARY KEY,
-	name 		varchar(100),
-	categoryId	long,
-	price		float,
-	restaurantId	long,
-	imageUrl	varchar(500)
+	id 				bigint AUTO_INCREMENT PRIMARY KEY,
+	name 			varchar(100),
+	categoryId		bigint,
+	price			float,
+	restaurantId 	bigint,
+	imageUrl		varchar(500)
 );
 
 
@@ -19,21 +19,21 @@ CREATE TABLE restaurant(
 );
 
 CREATE TABLE category(
-	id 			int AUTO_INCREMENT PRIMARY KEY,
+	id 			bigint AUTO_INCREMENT PRIMARY KEY,
 	name 		varchar(100)
 );
 
 
 CREATE TABLE rating(
-	id 				int AUTO_INCREMENT PRIMARY KEY,
+	id 				bigint AUTO_INCREMENT PRIMARY KEY,
 	value			int,
-	timeModified	long,
-	userId			long,
-	menuItemId		long
+	timeModified	int,
+	userId			bigint,
+	menuItemId		bigint
 );
 
 CREATE TABLE user(
-	id 				int AUTO_INCREMENT PRIMARY KEY,
+	id 				bigint AUTO_INCREMENT PRIMARY KEY,
 	email			varchar(100),
 	password		varchar(50)
 );
