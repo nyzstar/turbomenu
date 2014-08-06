@@ -22,12 +22,20 @@ object Rating{
 		ratingTable.update(rating)
 	}
 
+	def updateRating(id: Long, newRating: Int) = {
+
+	}
+
 	def delete(rating: Rating) = {
 		ratingTable.deleteWhere(r => r.id === rating.id)
 	}
 
 	def findById(id: Long) = inTransaction {
 		queryById(id).toList.headOption
+	}
+
+	def findByMenuItemAndUser(menuItemId: Long, userId: Long) = inTransaction {
+		queryByMenuItemAndUser(menuItemId, userId).toList
 	}
 
 	def averageRatingPerItem(menuItemId: Long) = inTransaction {
@@ -53,5 +61,10 @@ object Rating{
 	def queryByMenuItemId(id: Long): Query[Rating] = from(ratingTable){
 		rating=> where(rating.menuItemId === id) select(rating)
 	}
+
+	def queryByMenuItemAndUser(menuItemId: Long, userId: Long): Query[Rating] = from(ratingTable){
+		rating=> where(rating.menuItemId === menuItemId and rating.userId === userId) select(rating)
+	}
+
 
 }

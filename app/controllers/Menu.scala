@@ -12,6 +12,8 @@ import collection.immutable.List
 
 object MenuControl extends Controller{
 
+	case class RatingData(userId: Long, value: Int)
+
 	private val itemForm: Form[MenuItem] = Form(
 		mapping(
 			"id" -> longNumber.verifying(
@@ -24,16 +26,24 @@ object MenuControl extends Controller{
 		)(MenuItem.apply)(MenuItem.unapply)
 	)
 
-	val ratingForm: Form[Rating] = Form( 
+	// val ratingForm: Form[Rating] = Form( 
+	// 	mapping(
+	// 	"id" ->longNumber.verifying(
+	// 			"validation.id.duplicate", Rating.findById(_).isEmpty),
+	// 	"value" -> of[Int],
+	// 	"timeModified" -> of[Long],
+	// 	"userId" -> of[Long],
+	// 	"menuItemId" -> of[Long]
+	// 	)(Rating.apply)(Rating.unapply)
+	// )
+
+	val ratingForm = Form{
 		mapping(
-		"id" ->longNumber.verifying(
-				"validation.id.duplicate", Rating.findById(_).isEmpty),
-		"value" -> of[Int],
-		"timeModified" -> of[Long],
-		"userId" -> of[Long],
-		"menuItemId" -> of[Long]
-		)(Rating.apply)(Rating.unapply)
-	)
+			"userId" -> of[Long],
+			"value" -> of[Int]
+		)(RatingData.apply)(RatingData.unapply)
+	}
+
 
 	def list = Action { implicit request =>
 		val items = MenuItem.findAll
@@ -60,10 +70,19 @@ object MenuControl extends Controller{
 			},
 
 			success = { newItem =>
-				Rating.insert(newItem)
+				//Rating.insert(newItem)
+				val ratingList = Rating.findByMenuItemAndUser(id, newItem.userId)
+				println(ratingList)
+				if (ratingList.length == 0){
+					println("insert!")
+					Rating.insert(Rating(0, newItem.value, 191919191L, newItem.userId, id))
+				} else {
+					Rating.updateRating(ratingList(0).id, newItem.value)
+				}
 				val message = Messages("rating.new.success", newItem.value)
-				Redirect(routes.MenuControl.show(newItem.menuItemId)).flashing("success" -> message)
+				Redirect(routes.MenuControl.show(id)).flashing("success" -> message)
 			}
+	
 		) 
 	} 
 

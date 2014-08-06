@@ -1,4 +1,4 @@
-@(item: MenuItem, restaurant: Restaurant, rating: Double, ratingForm: Form[Rating])(implicit flash:Flash, lang: Lang)
+@(item: MenuItem, restaurant: Restaurant, rating: Double, ratingForm: Form[MenuControl.RatingData])(implicit flash:Flash, lang: Lang)
 
 
 @main(Messages("menu.details", item.name)){
@@ -29,11 +29,8 @@
 
 	  	@helper.form(action = routes.MenuControl.newRating(item.id)){
 			<fieldset>
-				@helper.inputText(ratingForm("id"))
 				@helper.inputText(ratingForm("value"))
-				@helper.inputText(ratingForm("timeModified"))
 				@helper.inputText(ratingForm("userId"))
-				@helper.inputText(ratingForm("menuItemId"))
 			</fieldset>
 			<p><input type="submit" class="btn primary"
 				value='@Messages("rate")'></p>
