@@ -8,11 +8,11 @@ import play.api.i18n.Messages
 import play.api.data.format.Formats._
 import collection.immutable.List
 
-object HomeControl extends Controller{
+object HomeControl extends Controller with Secured{
 
 	def browse(	orderBy: String, 
 				sortDirection: String, 
-				searchBy: String) = Action{	implicit request =>
+				searchBy: String) = withUser{user => implicit request =>
 		val items = filterBy(MenuItem.findAll, searchBy)
 		Ok(views.html.browse(items))
 	}

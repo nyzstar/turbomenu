@@ -17,6 +17,16 @@ object Auth extends Controller{
 		})
 	)
 
+	val signupForm = Form(
+		tuple(
+			"email" -> nonEmptyText,
+			"password" -> nonEmptyText,
+			"password_conform" -> nonEmptyText
+		) verifying (Messages("signup.password_not_match"), result => result match{
+			case (email, pw1, pw2) => pw1 == pw2
+		})
+	)
+
 	// def check(username: String, password: String) = {
 	// 	User.findByEmail(username) match{
 	// 		case Some(u) => u.checkPassword(password)
@@ -27,6 +37,10 @@ object Auth extends Controller{
 	def login = Action { implicit request => 
 		Ok(views.html.login(loginForm))
 	}
+
+	// def signup = Action { implicit request => 
+	// 	Ok(views.html.signup(signupForm))
+	// }
 
 	def authenticate = Action { implicit request =>
 		loginForm.bindFromRequest.fold(
