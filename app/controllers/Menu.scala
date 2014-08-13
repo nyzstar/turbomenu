@@ -56,7 +56,6 @@ object MenuControl extends Controller{
 		val rating = Rating.averageRatingPerItem(item.id)
 
 		Ok(views.html.items.details(item, restaurant, rating, ratingForm))
-		
 	}
 
 	def newRating(id: Long) = Action { implicit request =>
@@ -70,22 +69,22 @@ object MenuControl extends Controller{
 			},
 
 			success = { newItem =>
-				//Rating.insert(newItem)
 				val ratingList = Rating.findByMenuItemAndUser(id, newItem.userId)
-				println(ratingList)
+				
+				// if this user has not rated this item yet
 				if (ratingList.length == 0){
 					println("insert!")
 					Rating.insert(Rating(0, newItem.value, 191919191L, newItem.userId, id))
+				
+				// if this user wants to update a rate
 				} else {
-					Rating.updateRating(ratingList(0).id, newItem.value)
+					Rating.update(Rating(ratingList(0).id, newItem.value, 191919191L, newItem.userId, id))
 				}
 				val message = Messages("rating.new.success", newItem.value)
 				Redirect(routes.MenuControl.show(id)).flashing("success" -> message)
 			}
-	
 		) 
 	} 
-
 
 	def newItem = Action{ implicit request =>
 		val form = if (request.flash.get("error").isDefined)

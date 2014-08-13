@@ -38,9 +38,12 @@ object Rating{
 		queryByMenuItemAndUser(menuItemId, userId).toList
 	}
 
-	def averageRatingPerItem(menuItemId: Long) = inTransaction {
+	def averageRatingPerItem(menuItemId: Long): Float = inTransaction {
 		val list = queryByMenuItemId(menuItemId).toList
-		list.map(_.value).sum / list.length
+		if (list.length == 0){
+			return 0
+		}
+		return list.map(_.value).sum / list.length
 	}
 
 	def findAll: Iterable[Rating] = inTransaction {
