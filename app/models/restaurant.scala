@@ -18,15 +18,15 @@ case class Restaurant(
 object Restaurant{
 	import Database.{restaurantTable}
 
-	def insert(restaurant: Restaurant): Restaurant = {
+	def insert(restaurant: Restaurant): Restaurant = inTransaction{
 		restaurantTable.insert(restaurant)
 	}
 
-	def update(restaurant: Restaurant) = {
+	def update(restaurant: Restaurant) = inTransaction{
 		restaurantTable.update(restaurant)
 	}
 
-	def delete(restaurant: Restaurant) = {
+	def delete(restaurant: Restaurant) = inTransaction{
 		restaurantTable.deleteWhere(r => r.id === restaurant.id)
 	}
 

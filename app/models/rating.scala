@@ -18,15 +18,15 @@ object Rating{
 		ratingTable.insert(rating)
 	}
 
-	def update(rating: Rating) = {
+	def update(rating: Rating) = inTransaction{
 		ratingTable.update(rating)
 	}
 
-	def updateRating(id: Long, newRating: Int) = {
+	def updateRating(id: Long, newRating: Int) = inTransaction{
 
 	}
 
-	def delete(rating: Rating) = {
+	def delete(rating: Rating) = inTransaction{
 		ratingTable.deleteWhere(r => r.id === rating.id)
 	}
 

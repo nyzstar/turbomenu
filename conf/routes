@@ -5,6 +5,8 @@
 # Home page
 
 GET     /                           controllers.Application.index
+GET		/home 						controllers.HomeControl.index
+
 
 # Menu page
 POST	/menu 						controllers.MenuControl.save
@@ -21,11 +23,13 @@ GET 	/restaurant 				controllers.RestaurantControl.list
 GET		/restaurant/:id 			controllers.RestaurantControl.show(id: Long)
 
 
-GET		/browse 					controllers.HomeControl.browse(sortBy: String?="timeAdded", sortDirection: String="asc", searchBy: String="")
-
+GET		/browse 					controllers.BrowseControl.browse(sortBy: String?="timeAdded", sortDirection: String="asc", searchBy: String="")
 
 GET		/login						controllers.Auth.login
 POST	/authenticate				controllers.Auth.authenticate
+
+GET		/signup						controllers.Auth.signup
+POST	/signup						controllers.Auth.createNewUser
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
