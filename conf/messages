@@ -25,6 +25,7 @@ restaurant.new.command = New
 restaurant.new.submit = Add
 restaurant.new.success = Successfully Added Restaurant {0}
 restaurant.list.navigation = Navigation
+restaurant.details = Restaurant: {0}
 
 home.search = Search
 

@@ -1,27 +1,51 @@
 @(restaurant: Restaurant)(implicit flash:Flash, lang: Lang)
 
 @main(Messages("restaurant.details", restaurant.name)){
-	<h2>
-		@Messages("restaurant.details", restaurant.name)
-	</h2>
+	<div class="restaurant_profile_canopy group">
+		<div class="restaurant_profile_avatar">
+			<img src='@routes.Assets.at("/test_data/img/IzakayaMai.jpg")'/>
+		</div>
+		<div class="restaurant_profile_info">
+			<h2>
+				@restaurant.name
+			</h2>
+			<dl class="dl-horizontal">
+				<dt>@Messages("id"):</dt>
+				<dd>@restaurant.id</dd>
 
-	<dl class="dl-horizontal">
-		<dt>@Messages("id"):</dt>
-		<dd>@restaurant.id</dd>
+				<dt>@Messages("name"):</dt>
+				<dd>@restaurant.name</dd>
 
-		<dt>@Messages("name"):</dt>
-		<dd>@restaurant.name</dd>
+				<dt>@Messages("address"):</dt>
+				<dd>@restaurant.address</dd>
 
-		<dt>@Messages("address"):</dt>
-		<dd>@restaurant.address</dd>
+				<dt>@Messages("open"):</dt>
+				<dd>@restaurant.open</dd>
 
-		<dt>@Messages("open"):</dt>
-		<dd>@restaurant.open</dd>
+				<dt>@Messages("close"):</dt>
+				<dd>@restaurant.close</dd>
 
-		<dt>@Messages("close"):</dt>
-		<dd>@restaurant.close</dd>
+				<dt>@Messages("contact"):</dt>
+				<dd>@restaurant.contact</dd>
+			</dl>
+		</div>
+		
+		<ul class="nav nav-pills">
+		  <li class="active"><a href="#">Entree</a></li>
+		  <li><a href="#">Dessert</a></li>
+		  <li><a href="#">Drink</a></li>
+		</ul>
 
-		<dt>@Messages("contact"):</dt>
-		<dd>@restaurant.contact</dd>
-	</dl>
+		<div class="row">
+			@for(item <- new_items){
+	            <div class="col-6 col-sm-6 col-lg-4 menu-box">
+	              <span><a href="@controllers.routes.MenuControl.show(item.id)">@item.name</a></span>
+	              <div class="crop">
+				  	<img src='@routes.Assets.at(item.imageUrl)'/>
+				  </div>
+	            </div><!--/span-->
+        	}
+		</div>
+	</div>
+
 }
