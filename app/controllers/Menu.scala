@@ -5,7 +5,7 @@ import models.MenuItem
 import models.Restaurant
 import models.Rating
 import play.api.data.Form
-import play.api.data.Forms.{mapping, longNumber, nonEmptyText, of, number}
+import play.api.data.Forms.{mapping, longNumber, nonEmptyText, of, number,text}
 import play.api.i18n.Messages
 import play.api.data.format.Formats._
 import collection.immutable.List
@@ -22,7 +22,7 @@ object MenuControl extends Controller{
 			"category_id" -> of[Long],
 			"price" -> of[Float],
 			"restaurant_id" -> of[Long],
-			"imageUrl" -> nonEmptyText
+			"imageUrl" -> text.verifying("Enter imageurl", {!_.isEmpty})
 		)(MenuItem.apply)(MenuItem.unapply)
 	)
 
@@ -95,7 +95,28 @@ object MenuControl extends Controller{
 		Ok(views.html.items.editMenu(form))
 	}
 
-	def save = Action{ implicit request =>
+	// def upload = Action(parse.multipartFormData) { implicit request =>
+	//   request.body.file("picture").map { picture =>
+	//     import java.io.File
+	//     val filename = picture.filename 
+	//     val contentType = picture.contentType
+	//     picture.ref.moveTo(new File("test_data/img/" + filename))
+	//     Ok("File uploaded")
+	//   }.getOrElse {
+	//     Redirect(routes.Application.index).flashing(
+	//       "error" -> "Missing file"
+	//     )
+	//   }
+	// }
+
+	def save = Action(parse.multipartFormData){ implicit request =>
+		request.body.file("picture").map { picture =>
+		import java.io.File
+		val filename = picture.filename 
+		val contentType = picture.contentType
+		picture.ref.moveTo(new File(s"/Users/archer/codes/archer/turbomenu/public/test_data/img/" + filename))
+		}
+
 		val newMenu = itemForm.bindFromRequest()
 
 		newMenu.fold(
@@ -103,11 +124,13 @@ object MenuControl extends Controller{
 			hasErrors = { form =>
 				Redirect(routes.MenuControl.newItem()).
 					flashing(Flash(form.data) + 
-						("error" -> Messages("validation.errors")))
+						("error" -> form.errors.mkString))
 			},
 
 			success = { newItem =>
+				//newItem.imageUrl="/test_data/img/"+filename
 				MenuItem.insert(newItem)
+
 				val message = Messages("menu.new.success", newItem.name)
 				Redirect(routes.MenuControl.show(newItem.id)).flashing("success" -> message)
 			}

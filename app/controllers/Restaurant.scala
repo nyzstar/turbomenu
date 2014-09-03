@@ -39,7 +39,7 @@ object RestaurantControl extends Controller{
 		else
 			restaurantForm
 
-		Ok(views.html.restaurants.editMenu(form))
+		Ok(views.html.restaurants.editRestaurant(form))
 	}
 
 	def save = Action{ implicit request =>
