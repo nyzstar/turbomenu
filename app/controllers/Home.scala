@@ -8,13 +8,31 @@ import play.api.i18n.Messages
 import play.api.data.format.Formats._
 import collection.immutable.List
 
-object HomeControl extends Controller{
+object HomeControl extends Controller with Secured{
 
-	def browse(	orderBy: String, 
-				sortDirection: String, 
-				searchBy: String) = Action{	implicit request =>
-		val items = filterBy(MenuItem.findAll, searchBy)
-		Ok(views.html.browse(items))
+	//most popular with user login
+	def index = Action {implicit request => {
+			val items = MenuItem.findAll.slice(0, 6)
+			// Ok(views.html.home(items, items))
+			username(request).map { user =>
+	        	
+	        	//Get the recommended items.
+	        	//val rmd_items = getRecommendedItems()
+	        	
+	        	//Get the new items.
+	        	//val new_items = getNewItems()
+
+				Ok(views.html.home(items, items))
+	      	}.getOrElse {
+	      		//Get the popular items.
+	      		//val pop_items = getPopularItems()
+	      		//Get the new items.
+	      		//val new_items = getNewItems()
+
+	      		Ok(views.html.home(items, items))
+	      	}
+			
+		}
 	}
 
 	//simple search logic.

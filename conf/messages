@@ -18,17 +18,25 @@ menu.new.submit = Add
 menu.new.success = Successfully Added Item {0}
 menu.list.navigation = Navigation
 
+
 restaurant.form = Restaurant Details
 restaurant.new = (new)
 restaurant.new.command = New
 restaurant.new.submit = Add
 restaurant.new.success = Successfully Added Restaurant {0}
 restaurant.list.navigation = Navigation
+restaurant.details = Restaurant: {0}
 
 home.search = Search
 
 validation.errors = Please correct the errors in the form.
 validation.id.duplicate = A product with the same id already exists.
 
-login.errors = Invalid email or password
+login.errors = Invalid email or password.
 login.form = Sign In
+
+signup.form = Sign Up
+signup.errors = Invalid email or password.
+signup.already_sign_up = You have already signed up.
+
+signup.password_not_match = Password does not match.

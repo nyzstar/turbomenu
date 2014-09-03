@@ -1,4 +1,4 @@
-@(items: Iterable[MenuItem])(implicit flash: Flash, lang: Lang)
+@(items: Iterable[MenuItem])(implicit flash: Flash, lang: Lang, username: Option[String])
 @main(Messages("application.name")){
 	@navibar()
 	<div class="container">

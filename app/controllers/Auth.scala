@@ -17,6 +17,18 @@ object Auth extends Controller{
 		})
 	)
 
+	val signupForm = Form(
+		tuple(
+			"email" -> nonEmptyText,
+			"password" -> nonEmptyText,
+			"password_conform" -> nonEmptyText
+		) verifying (Messages("signup.password_not_match"), result => result match{
+			case (email, pw1, pw2) => pw1 == pw2
+		}) verifying (Messages("signup.already_sign_up"), result => result match{
+			case (e, p1, p2) => ! User.findByEmail(e).isDefined
+		})
+	)
+
 	// def check(username: String, password: String) = {
 	// 	User.findByEmail(username) match{
 	// 		case Some(u) => u.checkPassword(password)
@@ -28,15 +40,33 @@ object Auth extends Controller{
 		Ok(views.html.login(loginForm))
 	}
 
+	def signup = Action { implicit request => 
+		Ok(views.html.signup(signupForm))
+	}
+
+	def createNewUser = Action{ implicit request => 
+		signupForm.bindFromRequest.fold(
+			hasErrors = { formWithErrors => 
+				BadRequest(views.html.signup(formWithErrors))
+			},
+
+			success = { userData => {
+					User.insert(User(0, userData._1, userData._2))
+					Redirect(routes.Auth.login).withNewSession
+				}
+			}
+		)
+	}
+
 	def authenticate = Action { implicit request =>
 		loginForm.bindFromRequest.fold(
 			hasErrors = { form =>
-				Redirect(routes.HomeControl.browse()).
+				Redirect(routes.Auth.login).
 					flashing(("error" -> Messages("login.errors")))
 			},
 
 			success = { user =>
-				Redirect(routes.HomeControl.browse()).withSession(Security.username -> user._1)
+				Redirect(routes.HomeControl.index()).withSession(Security.username -> user._1)
 			}
 		)
 	}
@@ -49,12 +79,15 @@ object Auth extends Controller{
 }
 
 trait Secured {
-	def username(request: RequestHeader) = request.session.get(Security.username)
+	def username2(request: RequestHeader) = request.session.get(Security.username)
 	
+	implicit def username(implicit request: RequestHeader) = request.session.get(Security.username)
+
+
 	def onUnauthorized(request: RequestHeader) = Results.Redirect(routes.Auth.login)
 
 	def IsAuthenticated(f: => String => Request[AnyContent] => Result) = {
-		Security.Authenticated(username, onUnauthorized) {
+		Security.Authenticated(username2, onUnauthorized) {
 			user => Action(request => f(user)(request))
 		}
 	}

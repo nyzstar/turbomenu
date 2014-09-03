@@ -3,6 +3,24 @@ body {
   padding-bottom: 20px;
 }
 
+footer{
+    display: block;
+}
+
+
+.group:before,
+.group:after {
+    content: "";
+    display: table;
+}
+.group:after {
+    clear: both;
+}
+.group {
+    zoom: 1; /* IE6&7 */
+}
+
+
 .search-bar{
 	float: left;
 }
@@ -12,7 +30,7 @@ body {
 }
 
 .crop {
-    width: 100%px;
+    width: 100px;
     height: 250px;
     overflow: hidden;
 }
@@ -28,4 +46,24 @@ body {
 .menu-box {
 	border: 1px solid #FFF;
 	margin-top: 10px;
+}
+
+.restaurant_profile_canopy{
+
+}
+
+.restaurant_profile_avatar{
+    float: left;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border: 5px #999999 solid;
+}
+
+.restaurant_profile_info{
+    display: inline-block;
+}
+
+.navigation_category{
+    
 }

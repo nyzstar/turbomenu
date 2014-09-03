@@ -14,15 +14,15 @@ case class Category(
 object Category{
 	import Database.{categoryTable}
 
-	def insert(category: Category): Category = {
+	def insert(category: Category): Category = inTransaction {
 		categoryTable.insert(category)
 	}
 
-	def update(category: Category) = {
+	def update(category: Category) = inTransaction {
 		categoryTable.update(category)
 	}
 
-	def delete(category: Category) = {
+	def delete(category: Category) = inTransaction {
 		categoryTable.deleteWhere(c => c.id === category.id)
 	}
 

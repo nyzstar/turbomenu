@@ -22,7 +22,11 @@ object Rating{
 		ratingTable.update(rating)
 	}
 
-	def delete(rating: Rating) = {
+	def updateRating(id: Long, newRating: Int) = inTransaction{
+
+	}
+
+	def delete(rating: Rating) = inTransaction{
 		ratingTable.deleteWhere(r => r.id === rating.id)
 	}
 

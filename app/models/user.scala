@@ -17,15 +17,15 @@ case class User(
 object User{
 	import Database.{userTable}
 
-	def insert(user: User): User = {
+	def insert(user: User): User = inTransaction{
 		userTable.insert(user)
 	}
 
-	def update(user: User) = {
+	def update(user: User) = inTransaction{
 		userTable.update(user)
 	}
 
-	def delete(user: User) = {
+	def delete(user: User) = inTransaction{
 		userTable.deleteWhere(u => u.id === user.id)
 	}
 
