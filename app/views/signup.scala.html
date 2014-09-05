@@ -1,0 +1,33 @@
+@(signupForm: Form[(String, String, String)])(implicit flash: Flash, lang: Lang)
+@main(Messages("application.name")){
+  <h2 class="form-signin-heading">@Messages("signup.form")</h2>
+
+  @signupForm.globalError.map { error => 
+      <p class="error">
+        @error.message
+      </p>
+  }
+
+  @flash.get("success").map { message => 
+    <p class="success">
+      @message
+    </p>
+  }
+
+  @helper.form(action = routes.Auth.createNewUser()){
+
+    @helper.input(signupForm("email")){ (id, name, value, args) => 
+      <input type="email" name="@name" id="@id" class="form-control" placeholder="Email address" required autofocus>
+    }
+
+    @helper.input(signupForm("password")){ (id, name, value, args) => 
+      <input type="password" name="@name" id="@id" class="form-control" placeholder="Password" required>
+    }
+
+    @helper.input(signupForm("password")){ (id, name, value, args) => 
+      <input type="password_conform" name="@name" id="@id" class="form-control" placeholder="Confirm Password" required>
+    }
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+  }
+}
+

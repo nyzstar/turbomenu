@@ -1,0 +1,30 @@
+@(newItems: Iterable[MenuItem], rmdItems: Iterable[MenuItem])(implicit flash: Flash, lang: Lang, username: Option[String])
+@main(Messages("application.name")){
+	@navibar()
+	<h3>New Items</h3>
+	<div class="container">
+		<div class="row">
+		@for(item <- newItems){
+            <div class="col-6 col-sm-6 col-lg-4 menu-box">
+              <span><a href="@controllers.routes.MenuControl.show(item.id)">@item.name</a></span>
+              <div class="crop">
+			   <img src='@routes.Assets.at(item.imageUrl)'/>
+			  </div>
+            </div><!--/span-->
+        }
+		</div>
+	</div>
+	<h3>Recommendations</h3>
+	<div class="container">
+		<div class="row">
+		@for(item <- rmdItems){
+            <div class="col-6 col-sm-6 col-lg-4 menu-box">
+              <span><a href="@controllers.routes.MenuControl.show(item.id)">@item.name</a></span>
+              <div class="crop">
+			   <img src='@routes.Assets.at(item.imageUrl)'/>
+			  </div>
+            </div><!--/span-->
+        }
+		</div>
+	</div>
+}
