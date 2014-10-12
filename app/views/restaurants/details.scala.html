@@ -1,41 +1,71 @@
 @(restaurant: Restaurant)(implicit flash:Flash, lang: Lang)
-
 @main(Messages("restaurant.details", restaurant.name)){
-	<div class="restaurant_profile_canopy group">
+<div class="page_container" ng-app="restaurant">
+	<div ng-controller="restaurant_controller as rest">
 		<div class="restaurant_profile_avatar">
-			<img src='@routes.Assets.at("/test_data/img/IzakayaMai.jpg")'/>
-		</div>
+				<img src='@routes.Assets.at("/test_data/img/IzakayaMai.jpg")'/>
+			</div>
 		<div class="restaurant_profile_info">
 			<h2>
-				@restaurant.name
+				{{rest.name}}
 			</h2>
 			<dl class="dl-horizontal">
 				<dt>@Messages("id"):</dt>
-				<dd>@restaurant.id</dd>
+				<dd>{{rest.id}}</dd>
 
 				<dt>@Messages("name"):</dt>
-				<dd>@restaurant.name</dd>
+				<dd>{{rest.name}}</dd>
 
 				<dt>@Messages("address"):</dt>
-				<dd>@restaurant.address</dd>
+				<dd>{{rest.address}}</dd>
 
 				<dt>@Messages("open"):</dt>
-				<dd>@restaurant.open</dd>
+				<dd>{{rest.open}}</dd>
 
 				<dt>@Messages("close"):</dt>
-				<dd>@restaurant.close</dd>
+				<dd>{{rest.close}}</dd>
 
 				<dt>@Messages("contact"):</dt>
-				<dd>@restaurant.contact</dd>
+				<dd>{{rest.phone}}</dd>
 			</dl>
 		</div>
-		
-		<ul class="nav nav-pills">
-		  <li class="active"><a href="#">Entree</a></li>
-		  <li><a href="#">Dessert</a></li>
-		  <li><a href="#">Drink</a></li>
-		</ul>
-
+		<section ng-controller="MenuCollectionPanelController as menuPanel">
+			<ul class="nav nav-pills">
+				<li ng-class="{ active:menuPanel.isSelected(1) }"><a href ng-click="menuPanel.selectTab(1)">All</a></li>
+				<li ng-class="{ active:menuPanel.isSelected(2) }"><a href ng-click="menuPanel.selectTab(2)">Entree</a></li>
+				<li ng-class="{ active:menuPanel.isSelected(3) }"><a href ng-click="menuPanel.selectTab(3)">Dessert</a></li>
+				<li ng-class="{ active:menuPanel.isSelected(4) }"><a href ng-click="menuPanel.selectTab(4)">Drink</a></li>
+			</ul>
+			<div class="panel" ng-show="menuPanel.isSelected(1)" >
+				<h4>All</h4>
+				<section ng-repeat="item in rest.items">
+					<h4>{{ item.name }}</h4> | {{ item.category}} | {{ item.price }} 
+					<p>{{ item.description }}</p>
+				</section>
+			</div>
+			<div class="panel" ng-show="menuPanel.isSelected(2)" >
+				<h4>Entree</h4>
+				<section ng-repeat="item in rest.getItemsByCategory('entree')">
+					<h4>{{ item.name }}</h4> | {{ item.category}} | {{ item.price }} 
+					<p>{{ item.description }}</p>
+				</section>
+			</div>
+			<div class="panel" ng-show="menuPanel.isSelected(3)" >
+				<h4>Dessert</h4>
+				<section ng-repeat="item in rest.getItemsByCategory('dessert')">
+					<h4>{{ item.name }}</h4> | {{ item.category}} | {{ item.price }} 
+					<p>{{ item.description }}</p>
+				</section>
+			</div>
+			<div class="panel" ng-show="menuPanel.isSelected(4)" >
+				<h4>Drink</h4>
+				<section ng-repeat="item in rest.getItemsByCategory('drink')">
+					<h4>{{ item.name }}</h4> | {{ item.category}} | {{ item.price }} 
+					<p>{{ item.description }}</p>
+				</section>
+			</div>
+		</section>
 	</div>
-
+</div>
+<script src='@routes.Assets.at("javascripts/restaurant.js")'></script>
 }

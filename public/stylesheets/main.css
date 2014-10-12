@@ -53,7 +53,6 @@ footer{
 }
 
 .restaurant_profile_avatar{
-    float: left;
     width: 200px;
     height: 200px;
     overflow: hidden;

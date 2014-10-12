@@ -114,7 +114,7 @@ object MenuControl extends Controller{
 		import java.io.File
 		val filename = picture.filename 
 		val contentType = picture.contentType
-		picture.ref.moveTo(new File(s"/Users/archer/codes/archer/turbomenu/public/test_data/img/" + filename))
+		picture.ref.moveTo(new File(s"/public/test_data/img/" + filename))
 		}
 
 		val newMenu = itemForm.bindFromRequest()
